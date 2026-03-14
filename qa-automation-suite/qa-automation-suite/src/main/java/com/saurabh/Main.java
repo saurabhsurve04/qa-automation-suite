@@ -39,11 +39,42 @@ public class Main {
         uiTest2.pass();
         uiTest2.generateReport();
 
-        APITest apiTest = new APITest("Payment API Test",3.2,"http:\\www.google.com");
+        APITest apiTest = new APITest("Payment API Test",3.2,"http://www.google.com");
         apiTest.run();
         apiTest.pass();
         apiTest.printStatus();
         System.out.println("Endpoint URL: " + apiTest.getEndpointURL());
+
+        TestSuite testSuite = new TestSuite("Regression Suite");
+        testSuite.addTest(new UITest("Login UI Test",3.2,"Chrome"));
+        testSuite.addTest(new UITest("Logout UI Test",1.2,"Chrome"));
+        testSuite.addTest(new APITest("Payment API",1.2,"http://www.google.com"));
+
+        testSuite.runAll();
+        System.out.println("Total Tests: " + testSuite.getTotalTests());
+
+        try {
+            TestSuite testSuite2 = new TestSuite("Regression Suite2");
+            UITest t1 = new UITest("Login UI Test",3.2,"Chrome");
+            UITest t2 = new UITest("Logout UI Test",1.2,"Chrome");
+            APITest t3 = new APITest("Payment API",3.2,"http:\\www.google.com");
+
+            testSuite2.addTest(null);
+            testSuite2.addTest(t1);
+            testSuite2.addTest(t2);
+            testSuite2.addTest(t3);
+
+            t1.pass();
+            t2.pass();
+            t3.fail();
+
+            testSuite2.printResults();
+        } catch (TestSuiteException e) {
+            System.out.println("Error: " + e.getMessage() + "\n");
+
+        } finally {
+            System.out.printf("Suite Execution Completed\n");
+        }
     }
 
 }
