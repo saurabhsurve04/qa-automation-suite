@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,6 +23,57 @@ public class FirstTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.IMPLICIT_WAIT));
+    }
+
+    @Test
+    public void dynamicElementTest(){
+        driver.get("https://practice.expandtesting.com/dynamic-controls");
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
+
+//        Check whether the textbox is clickable
+        WebElement textbox = driver.findElement(By.xpath("//input[@type ='text']"));
+        if(!textbox.isEnabled()) {
+            driver.findElement(By.xpath("//button[text()='Enable']")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type ='text']")));
+            WebElement textbox1 = driver.findElement(By.xpath("//input[@type ='text']"));
+            Assert.assertTrue(textbox1.isEnabled(), "Text box is not enabled");
+            System.out.println("Text box is enabled");
+            driver.findElement(By.xpath("//button[text() ='Disable']")).click();
+            System.out.println("Text box is now disabled");
+
+        } else {
+            driver.findElement(By.xpath("//button[text() ='Disable']")).click();
+            wait.until(ExpectedConditions.not(
+                    ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']"))
+            ));
+            WebElement textbox2 = driver.findElement(By.xpath("//input[@type ='text']"));
+            Assert.assertFalse(textbox2.isEnabled(), "Text box is enabled");
+            System.out.println("Text box is disabled");
+        }
+    }
+
+    @Test
+    public void dynamicElementTest1(){
+        driver.get("https://practice.expandtesting.com/dynamic-controls");
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
+
+//        Assert whether checkbox is available
+        WebElement checkbox = driver.findElement(By.xpath("//input[@type='checkbox']"));
+        Assert.assertTrue(checkbox.isDisplayed(),"Checkbox is not displayed");
+        System.out.println("Checkbox is Displayed");
+
+//        Remove checkbox by clicking on Remove button
+        driver.findElement(By.xpath("//button[text()='Remove']")).click();
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//input[@type='checkbox']")));
+        System.out.println("Checkbox is removed");
+
+//        Add checkbox by clicking on Add button
+        driver.findElement(By.xpath("//button[text()='Add']")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type='checkbox']")));
+        System.out.println("Checkbox is added again");
     }
 
     @Test
