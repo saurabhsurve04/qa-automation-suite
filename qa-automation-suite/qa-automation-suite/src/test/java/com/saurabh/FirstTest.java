@@ -58,6 +58,26 @@ public class FirstTest {
         Assert.assertTrue(messageText.contains("You logged into a secure area!"), "Success message not found");
     }
 
+    @Test
+    public void navigationTest(){
+        // Go to Google
+        driver.get("https://www.google.com");
+        System.out.println("Page 1 title is: " + driver.getTitle());
+
+        driver.navigate().to("https://practice.expandtesting.com");
+        System.out.println("Page 2 title is: " + driver.getTitle());
+
+        driver.navigate().back();
+        System.out.println("After back, title is: " + driver.getTitle());
+
+        driver.navigate().forward();
+        System.out.println("After forward, title is: " + driver.getTitle());
+
+        driver.navigate().refresh();
+        System.out.println("After refresh, title is: " + driver.getTitle());
+
+    }
+
     @AfterSuite
     public void tearDown() {
         if (driver != null) {
