@@ -6,23 +6,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SecurePage extends BasePage {
 
-    private By successMessage = By.tagName("b");
-    private By logoutButton = By.xpath("//i[contains(text(),'Logout')]");
+    private final By successMessage = By.tagName("b");
+    private final By logoutButton = By.xpath("//i[contains(text(),'Logout')]");
 
     public SecurePage(WebDriver driver) {
         super(driver);
     }
 
-    public String getSuccessMessage(){
+    public String getSuccessMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         return driver.findElement(successMessage).getText();
     }
 
-    public void clickLogoutButton(){
+    public void clickLogoutButton() {
         driver.findElement(logoutButton).click();
     }
 
-    public String getCurrentUrl(){
+    public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 }
