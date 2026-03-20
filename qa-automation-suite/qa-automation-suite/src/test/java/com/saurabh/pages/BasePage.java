@@ -10,6 +10,7 @@ public class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
