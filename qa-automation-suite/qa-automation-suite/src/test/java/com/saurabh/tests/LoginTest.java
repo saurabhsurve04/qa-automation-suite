@@ -9,10 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.Map;
 @Listeners({TestListeners.class})
@@ -35,6 +32,35 @@ public class LoginTest {
         DriverManager.getDriver().manage().window().maximize();
         driver = DriverManager.getDriver();
         loginPage = new LoginPage(driver);
+    }
+
+    @DataProvider(name = "loginData")
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"practice","SuperSecretPassword!",true,"secure"},
+                {"wronguser","wrongpassword",false,"login"},
+                {"practice","wrongpassword",false,"login"}
+        };
+    }
+
+    @Test(dataProvider = "loginData")
+    public void dataDriverLoginTest(String username, String password, boolean shouldPass, String expectedUrl) throws InterruptedException {
+        driver.get("https://practice.expandtesting.com/login");
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
+        loginPage.clickLogin();
+
+        Assert.assertTrue(driver.getCurrentUrl().contains(expectedUrl),"URL assertion failed for user: " + username);
+        System.out.println("Test passed for user: " + username);
+
+        if(shouldPass){
+            Assert.assertTrue(loginPage.getSuccessMessage().contains("You logged into a secure area!"),"Success message not found for user:" + username);
+            System.out.println("Valid login verified for user: " + username);
+        } else {
+            Assert.assertTrue(loginPage.getErrorMessage().contains("invalid"),"Error message not found for user:" + username);
+            System.out.println("Invalid login verified for user: " + username);
+        }
+
     }
 
     @Test
