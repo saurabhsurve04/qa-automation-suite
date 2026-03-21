@@ -4,14 +4,15 @@ public class TestResultsReporter {
 
     static void result(String testName, double passed, double totalTests) {
         double passPercentage = percentageCal(passed, totalTests);
-        if (passPercentage >= 80){
-            System.out.printf("%s passed with %.2f \n",testName,passPercentage);
-        } else if(passPercentage < 80 && passPercentage >= 50){
-            System.out.printf("%s has a build warning with %.2f \n",testName,passPercentage);
-        } else if (passPercentage < 50){
-            System.out.printf("%s has failed with %.2f \n",testName,passPercentage);
+        if (passPercentage >= 80) {
+            System.out.printf("%s passed with %.2f \n", testName, passPercentage);
+        } else if (passPercentage < 80 && passPercentage >= 50) {
+            System.out.printf("%s has a build warning with %.2f \n", testName, passPercentage);
+        } else if (passPercentage < 50) {
+            System.out.printf("%s has failed with %.2f \n", testName, passPercentage);
         }
     }
+
     static double percentageCal(double passedTests, double totalTests) {
         double passPercentage = 0;
         if (totalTests <= 0) {

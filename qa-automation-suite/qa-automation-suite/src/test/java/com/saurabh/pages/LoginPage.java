@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class LoginPage extends BasePage {
 
 
-
-//    Locators
+    //    Locators
     private By usernameField = By.id("username");
     private By passwordField = By.id("password");
     private By loginButton = By.id("submit-login");
@@ -22,30 +21,30 @@ public class LoginPage extends BasePage {
 
     }
 
-    public void enterUsername(String username){
+    public void enterUsername(String username) {
         driver.findElement(usernameField).sendKeys(username);
     }
 
-    public void enterPassword(String password){
+    public void enterPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickLogin(){
+    public void clickLogin() {
         WebElement button = driver.findElement(loginButton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
     }
 
-    public String getSuccessMessage(){
+    public String getSuccessMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         return driver.findElement(successMessage).getText();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         return driver.findElement(successMessage).getText();
     }
 
-    public String getCurrentUrl(){
+    public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 }

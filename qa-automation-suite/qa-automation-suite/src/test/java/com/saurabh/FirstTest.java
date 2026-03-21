@@ -9,7 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -26,14 +28,14 @@ public class FirstTest {
     }
 
     @Test
-    public void dynamicElementTest(){
+    public void dynamicElementTest() {
         driver.get("https://practice.expandtesting.com/dynamic-controls");
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
 
 //        Check whether the textbox is clickable
         WebElement textbox = driver.findElement(By.xpath("//input[@type ='text']"));
-        if(!textbox.isEnabled()) {
+        if (!textbox.isEnabled()) {
             driver.findElement(By.xpath("//button[text()='Enable']")).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type ='text']")));
             WebElement textbox1 = driver.findElement(By.xpath("//input[@type ='text']"));
@@ -54,14 +56,14 @@ public class FirstTest {
     }
 
     @Test
-    public void dynamicElementTest1(){
+    public void dynamicElementTest1() {
         driver.get("https://practice.expandtesting.com/dynamic-controls");
 
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.EXPLICIT_WAIT));
 
 //        Assert whether checkbox is available
         WebElement checkbox = driver.findElement(By.xpath("//input[@type='checkbox']"));
-        Assert.assertTrue(checkbox.isDisplayed(),"Checkbox is not displayed");
+        Assert.assertTrue(checkbox.isDisplayed(), "Checkbox is not displayed");
         System.out.println("Checkbox is Displayed");
 
 //        Remove checkbox by clicking on Remove button
@@ -111,7 +113,7 @@ public class FirstTest {
     }
 
     @Test
-    public void navigationTest(){
+    public void navigationTest() {
         // Go to Google
         driver.get("https://www.google.com");
         System.out.println("Page 1 title is: " + driver.getTitle());

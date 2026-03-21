@@ -1,7 +1,5 @@
 package com.saurabh;
 
-import org.openqa.selenium.remote.Browser;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -15,12 +13,12 @@ public class Main {
 //            testResultsReport.result(testNames[i], passedTests[i], totalTests);
 //        }
 
-        TestCase test1 = new TestCase("Login Test",2.5);
+        TestCase test1 = new TestCase("Login Test", 2.5);
         test1.run();
         test1.pass();
         test1.printStatus();
 
-        TestCase test2 = new TestCase("Payment Test",4.1);
+        TestCase test2 = new TestCase("Payment Test", 4.1);
         test2.run();
         test2.fail();
         test2.printStatus();
@@ -28,36 +26,36 @@ public class Main {
         System.out.println(test1.getTestName());
         System.out.println(test2.getDuration());
 
-        UITest uiTest = new UITest("Login UI Test",3.2,"Chrome");
+        UITest uiTest = new UITest("Login UI Test", 3.2, "Chrome");
         uiTest.run();
         uiTest.pass();
         uiTest.printStatus();
         System.out.println("Browser: " + uiTest.getBrowserName());
 
-        UITest uiTest2 = new UITest("Logout UI Test",1.2,"Chrome");
+        UITest uiTest2 = new UITest("Logout UI Test", 1.2, "Chrome");
         uiTest2.run();
         uiTest2.pass();
         uiTest2.generateReport();
 
-        APITest apiTest = new APITest("Payment API Test",3.2,"http://www.google.com");
+        APITest apiTest = new APITest("Payment API Test", 3.2, "http://www.google.com");
         apiTest.run();
         apiTest.pass();
         apiTest.printStatus();
         System.out.println("Endpoint URL: " + apiTest.getEndpointURL());
 
         TestSuite testSuite = new TestSuite("Regression Suite");
-        testSuite.addTest(new UITest("Login UI Test",3.2,"Chrome"));
-        testSuite.addTest(new UITest("Logout UI Test",1.2,"Chrome"));
-        testSuite.addTest(new APITest("Payment API",1.2,"http://www.google.com"));
+        testSuite.addTest(new UITest("Login UI Test", 3.2, "Chrome"));
+        testSuite.addTest(new UITest("Logout UI Test", 1.2, "Chrome"));
+        testSuite.addTest(new APITest("Payment API", 1.2, "http://www.google.com"));
 
         testSuite.runAll();
         System.out.println("Total Tests: " + testSuite.getTotalTests());
 
         try {
             TestSuite testSuite2 = new TestSuite("Regression Suite2");
-            UITest t1 = new UITest("Login UI Test",3.2,"Chrome");
-            UITest t2 = new UITest("Logout UI Test",1.2,"Chrome");
-            APITest t3 = new APITest("Payment API",3.2,"http:\\www.google.com");
+            UITest t1 = new UITest("Login UI Test", 3.2, "Chrome");
+            UITest t2 = new UITest("Logout UI Test", 1.2, "Chrome");
+            APITest t3 = new APITest("Payment API", 3.2, "http:\\www.google.com");
 
             testSuite2.addTest(null);
             testSuite2.addTest(t1);

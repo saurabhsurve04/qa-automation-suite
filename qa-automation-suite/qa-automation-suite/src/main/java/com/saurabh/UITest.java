@@ -8,6 +8,7 @@ public class UITest extends TestCase implements Executable {
         super(testName, duration);
         this.browserName = browserName;
     }
+
     @Override
     public void run() {
         System.out.println("Running UITest: " + getTestName() + " on " + getBrowserName());
