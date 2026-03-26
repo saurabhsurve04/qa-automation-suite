@@ -13,7 +13,6 @@ import org.testng.Assert;
 
 public class LoginSteps {
 
-    WebDriver driver;
     LoginPage loginPage;
     SecurePage securePage;
 
@@ -21,7 +20,7 @@ public class LoginSteps {
     public void UserIsOnLoginPage() throws Throwable {
         loginPage = new LoginPage(DriverManager.getDriver());
         securePage = new SecurePage(DriverManager.getDriver());
-        driver.get("https://practice.expandtesting.com/login");
+        DriverManager.getDriver().get("https://practice.expandtesting.com/login");
     }
 
     @When("USER enter username {string}")
@@ -41,7 +40,7 @@ public class LoginSteps {
 
     @Then("USER should see {string}")
     public void userShouldSee(String expectedResult) throws Throwable {
-        String actualMessage = driver.findElement(By.tagName("b")).getText();
+        String actualMessage = DriverManager.getDriver().findElement(By.tagName("b")).getText();
         Assert.assertTrue(actualMessage.contains(expectedResult), "Expected result: " + expectedResult + " but got: " + actualMessage);
     }
 }

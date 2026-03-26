@@ -3,7 +3,10 @@ package com.saurabh.stepdefinition;
 import com.saurabh.utils.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,7 +30,16 @@ public class Hooks {
     }
 
     @After
-    public void afterScenario() {
+    public void afterScenario(Scenario scenario) {
+        if(scenario.isFailed()){
+            try{
+                byte[] screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+                System.out.println("Screenshot attached to Cucumber Report");
+            } catch (Exception e){
+                System.out.println(STR."Could not take screenshot: \{e.getMessage()}");
+            }
+        }
         System.out.println("Finishing scenario.......");
         DriverManager.quitDriver();
     }
