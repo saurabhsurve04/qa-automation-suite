@@ -24,7 +24,7 @@ Feature: User Login
     Then USER should see "<expectedResult>"
     Examples:
       | username | password | expectedResult            |
-      |          |          | Your username is invalid!s |
+      |          |          | Your username is invalid! |
 
 
 

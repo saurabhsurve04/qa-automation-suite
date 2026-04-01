@@ -23,14 +23,18 @@ public class LoginTest {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--diable-save-passwpord-bubble");
+        options.addArguments("--disable-save-password-bubble");
         options.addArguments("--disable-notifications");
         options.addArguments("--incognito");
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         options.setExperimentalOption("prefs", Map.of("credentials_enable_service", false, "profile.password_manager_enabled", false));
 
         DriverManager.setDriver(new ChromeDriver(options));
-        DriverManager.getDriver().manage().window().maximize();
         driver = DriverManager.getDriver();
+        driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
     }
 
