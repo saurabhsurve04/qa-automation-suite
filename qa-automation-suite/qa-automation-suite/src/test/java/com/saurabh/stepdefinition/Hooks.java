@@ -20,6 +20,10 @@ public class Hooks {
         System.out.println("Starting scenario.......");
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--incognito");
         options.addArguments("--disable-notifications");
         options.setExperimentalOption("prefs", Map.of("credentials_enable_service", false, "profile.password_manager_enabled", false));
