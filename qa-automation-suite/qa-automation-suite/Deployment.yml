@@ -15,6 +15,9 @@ spec:
     spec:
       containers:
         - name: testgenie
-          image: saurabhsurve04/testgenie:1.0
+          image: nginx:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: testgenie-config
