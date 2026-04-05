@@ -4,7 +4,7 @@ metadata:
   name: testgenie-service
   namespace: default
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: testgenie
   ports:
