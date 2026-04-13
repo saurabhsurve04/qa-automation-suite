@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oom-pod
+spec:
+  containers:
+    - name: oom-container
+      image: busybox
+      command: ["sh", "-c", "tail /dev/zero"]
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "64Mi"
+          cpu: "500m"
