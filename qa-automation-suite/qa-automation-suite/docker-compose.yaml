@@ -1,0 +1,36 @@
+services:
+  selenium-hub:
+    image: selenium/hub:4.1.0
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  chrome:
+    image: selenium/node-chrome:4.1.0
+    shm_size: "2g"
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+#Ports are not needed for VNC access in this setup, as the Selenium Grid will handle communication between the hub and nodes internally. Uncomment the ports section if you want to access the VNC of the nodes for debugging purposes
+#    ports:
+#      - "5901:5900"
+#      - "5903:5900"
+#      - "5904:5900"
+
+  firefox:
+    image: selenium/node-firefox:4.1.0
+    shm_size: "2g"
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+#Ports are not needed for VNC access in this setup, as the Selenium Grid will handle communication between the hub and nodes internally. Uncomment the ports section if you want to access the VNC of the nodes for debugging purposes
+#    ports:
+#      - "5902:5900"
