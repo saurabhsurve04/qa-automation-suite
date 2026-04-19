@@ -16,8 +16,11 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    ports:
-      - "5901:5900"
+#Ports are not needed for VNC access in this setup, as the Selenium Grid will handle communication between the hub and nodes internally. Uncomment the ports section if you want to access the VNC of the nodes for debugging purposes
+#    ports:
+#      - "5901:5900"
+#      - "5903:5900"
+#      - "5904:5900"
 
   firefox:
     image: selenium/node-firefox:4.1.0
@@ -28,5 +31,6 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    ports:
-      - "5902:5900"
+#Ports are not needed for VNC access in this setup, as the Selenium Grid will handle communication between the hub and nodes internally. Uncomment the ports section if you want to access the VNC of the nodes for debugging purposes
+#    ports:
+#      - "5902:5900"
