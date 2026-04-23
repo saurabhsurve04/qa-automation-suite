@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: testgenie-svc
+  namespace: saurabhsurve04-dev
+  uid: 9924b2ed-fa34-491d-af12-2d4d203d5546
+  resourceVersion: '6132160026'
+  creationTimestamp: '2026-04-23T03:02:54Z'
+  labels:
+    testgenie-svc: ''
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2026-04-23T03:22:15Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:testgenie-svc': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":80,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.175.16
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.175.16
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: testgenie-app
+status:
+  loadBalancer: {}

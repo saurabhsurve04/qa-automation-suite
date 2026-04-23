@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgenie-app
+  namespace: saurabhsurve04-dev
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: testgenie-app
+  template:
+    metadata:
+      labels:
+        app: testgenie-app
+    spec:
+      containers:
+        - name: testgenie-app
+          image: nginx:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: testgenie-config

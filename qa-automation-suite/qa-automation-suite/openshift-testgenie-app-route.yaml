@@ -1,0 +1,61 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+  resourceVersion: '6132160786'
+  name: route-testgenie
+  uid: 5d260f9a-d0a7-4821-8030-c8a6149f720c
+  creationTimestamp: '2026-04-23T02:59:17Z'
+  generation: 5
+  managedFields:
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-04-23T02:59:17Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-04-23T03:22:31Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:testgenie-route': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+  namespace: saurabhsurve04-dev
+  labels:
+    testgenie-route: ''
+spec:
+  host: route-testgenie-saurabhsurve04-dev.apps.rm1.0a51.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: testgenie-svc
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: route-testgenie-saurabhsurve04-dev.apps.rm1.0a51.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2026-04-23T02:59:17Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.rm1.0a51.p1.openshiftapps.com

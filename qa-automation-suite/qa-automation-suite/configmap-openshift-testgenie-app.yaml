@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: testgenie-config
+  namespace: saurabhsurve04-dev
+data:
+  APP_ENV: sandbox
+  LOG_LEVEL: INFO
